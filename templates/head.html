@@ -1,4 +1,6 @@
+{% load static %}
 <head>
+
     <meta charset="UTF-8">
     <title>TTM TalmoBang</title>
     <!--  부트스트랩 링크 CDN 방식  -->
@@ -8,4 +10,7 @@
     <!--  구글폰트 링크 CDN 방식 -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+    <!-- 앱폴더가 아닌 루트폴더 바로 아래의 찾기시작작staic 폴더의 base.css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}" />
 </head>
