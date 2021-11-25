@@ -6,6 +6,11 @@
         <h2 style="font-weight: bold;">
             {{ target_user.username }}
         </h2>
+        {% if target_user == request.user %}
+          <a href="{% url 'accountapp:update' pk=user.pk %}">
+              회원 정보 수정
+          </a>
+        {% endif %}
     </div>
 </div>
 
