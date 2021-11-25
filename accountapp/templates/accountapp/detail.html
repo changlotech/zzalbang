@@ -8,7 +8,14 @@
         </h2>
         {% if target_user == request.user %}
           <a href="{% url 'accountapp:update' pk=user.pk %}">
-              회원 정보 수정
+             <p>
+                 회원 정보 수정
+             </p>
+
+
+          </a>
+         <a href="{% url 'accountapp:delete' pk=user.pk %}">
+              회원 탈퇴
           </a>
         {% endif %}
     </div>

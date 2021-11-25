@@ -8,17 +8,29 @@
         <span>nav3</span>
         {% if not user.is_authenticated %}
         <!-- ?next 파라미터의 값 즉 현재위치로 리다이렉트 -->
+              <a href="{% url 'accountapp:create' %}">
+                <span>
+                    SignUp
+                </span>
+              </a>
              <a href="{% url 'accountapp:login' %}?next={{ request.path }}">
                 <span>
                     Login
                 </span>
             </a>
-            {% else %}
+
+
+        {% else %}
             <a href="{% url 'accountapp:logout' %}?next={{ request.path}}">
                 <span>
                      Logout
                 </span>
             </a>
-            {% endif %}
-            </div>
+             <a href="{% url 'accountapp:detail'  pk=user.pk %}">
+                <span>
+                    My Page
+                </span>
+            </a>
+        {% endif %}
+    </div>
 </div>
