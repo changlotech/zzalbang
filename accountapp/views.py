@@ -1,10 +1,13 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseForbidden
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
+from accountapp.decorator import account_ownership_required
 from accountapp.forms import AccountUpdateForm
 
 
@@ -30,8 +33,11 @@ class AccountDetailView(DetailView):
     #위의 템플릿에서 User 모델을 어떤 변수명으로 사용할 것인지
     context_object_name = 'target_user'
 
-
-
+#method_decorator라는 번역기를 달아서, 클래스 안의 메소드에도 작용하도록
+@method_decorator(login_required, 'get')
+@method_decorator(login_required, 'post')
+@method_decorator(account_ownership_required, 'get')
+@method_decorator(account_ownership_required, 'post')
 class AccountUpdateView(UpdateView):
     #어떤 모델을 쓸건지
     model = User
@@ -45,20 +51,12 @@ class AccountUpdateView(UpdateView):
     context_object_name = 'target_user'
 
     #겟요청 처리 겟 메소드 오버라이딩
-    def get(self, *args, **kwargs):
-        #겟요청을 보낸 유저가 로그인된 상태이고 (and) 계정정보 수정요청을 보내는 유저가 계정주인
-        if self.request.user.is_authenticated and self.get_object() == self.request.user:
-            return super().get(*args, **kwargs)
-        else:
-            return HttpResponseForbidden()
-    #포스트요청 처리 못하도록 post 메소드 오버라이딩
-    def post(self, *args, **kwargs):
-        #post요청을 보낸 유저가 로그인된 상태이고 (and) 계정정보 수정요청을 보내는 유저가 계정주인
-        if self.request.user.is_authenticated and self.get_object() == self.request.user:
-            return super().get(*args, **kwargs)
-        else:
-            return HttpResponseForbidden()
 
+#method_decorator라는 번역기를 달아서, 클래스 안의 메소드에도 작용하도록
+@method_decorator(login_required, 'get')
+@method_decorator(login_required, 'post')
+@method_decorator(account_ownership_required, 'get')
+@method_decorator(account_ownership_required, 'post')
 class AccountDeleteView(DeleteView):
     #어떤 모델을 쓸건지
     model = User
@@ -70,17 +68,8 @@ class AccountDeleteView(DeleteView):
     context_object_name = 'target_user'
 
     # 겟요청 처리 겟 메소드 오버라이딩
-    def get(self, *args, **kwargs):
-        # 겟요청을 보낸 유저가 로그인된 상태이고 (and) 계정정보 수정요청을 보내는 유저가 계정주인
-        if self.request.user.is_authenticated and self.get_object() == self.request.user:
-            return super().get(*args, **kwargs)
-        else:
-            return HttpResponseForbidden()
+    #지우고 데코레이션 함수 로 대체
 
-    # 포스트요청 처리 못하도록 post 메소드 오버라이딩
-    def post(self, *args, **kwargs):
-        # post요청을 보낸 유저가 로그인된 상태이고 (and) 계정정보 수정요청을 보내는 유저가 계정주인
-        if self.request.user.is_authenticated and self.get_object() == self.request.user:
-            return super().get(*args, **kwargs)
-        else:
-            return HttpResponseForbidden()
+
+
+
