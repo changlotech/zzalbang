@@ -1,5 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.http import HttpResponseForbidden
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
@@ -43,6 +44,21 @@ class AccountUpdateView(UpdateView):
     #위의 html에서 User모델을 어떤 변수로 화면출력이 되게 할 것인가
     context_object_name = 'target_user'
 
+    #겟요청 처리 겟 메소드 오버라이딩
+    def get(self, *args, **kwargs):
+        #겟요청을 보낸 유저가 로그인된 상태이고 (and) 계정정보 수정요청을 보내는 유저가 계정주인
+        if self.request.user.is_authenticated and self.get_object() == self.request.user:
+            return super().get(*args, **kwargs)
+        else:
+            return HttpResponseForbidden()
+    #포스트요청 처리 못하도록 post 메소드 오버라이딩
+    def post(self, *args, **kwargs):
+        #post요청을 보낸 유저가 로그인된 상태이고 (and) 계정정보 수정요청을 보내는 유저가 계정주인
+        if self.request.user.is_authenticated and self.get_object() == self.request.user:
+            return super().get(*args, **kwargs)
+        else:
+            return HttpResponseForbidden()
+
 class AccountDeleteView(DeleteView):
     #어떤 모델을 쓸건지
     model = User
@@ -52,3 +68,19 @@ class AccountDeleteView(DeleteView):
     template_name = 'accountapp/delete.html'
     #위의 템플릿에서 User모델을 어떤 변수명으로 사용할 것인지
     context_object_name = 'target_user'
+
+    # 겟요청 처리 겟 메소드 오버라이딩
+    def get(self, *args, **kwargs):
+        # 겟요청을 보낸 유저가 로그인된 상태이고 (and) 계정정보 수정요청을 보내는 유저가 계정주인
+        if self.request.user.is_authenticated and self.get_object() == self.request.user:
+            return super().get(*args, **kwargs)
+        else:
+            return HttpResponseForbidden()
+
+    # 포스트요청 처리 못하도록 post 메소드 오버라이딩
+    def post(self, *args, **kwargs):
+        # post요청을 보낸 유저가 로그인된 상태이고 (and) 계정정보 수정요청을 보내는 유저가 계정주인
+        if self.request.user.is_authenticated and self.get_object() == self.request.user:
+            return super().get(*args, **kwargs)
+        else:
+            return HttpResponseForbidden()
