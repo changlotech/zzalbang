@@ -10,6 +10,7 @@ from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from accountapp.decorator import account_ownership_required
 from accountapp.forms import AccountUpdateForm
 
+has_ownership = [account_ownership_required, login_required]
 
 def hello_world(request):
     return render(request, 'accountapp/hello.html')
@@ -34,10 +35,9 @@ class AccountDetailView(DetailView):
     context_object_name = 'target_user'
 
 #method_decorator라는 번역기를 달아서, 클래스 안의 메소드에도 작용하도록
-@method_decorator(login_required, 'get')
-@method_decorator(login_required, 'post')
-@method_decorator(account_ownership_required, 'get')
-@method_decorator(account_ownership_required, 'post')
+# import를 has_ownership으로 묶어 주고, 두 줄로 줄임
+@method_decorator(has_ownership, 'get')
+@method_decorator(has_ownership, 'post')
 class AccountUpdateView(UpdateView):
     #어떤 모델을 쓸건지
     model = User
@@ -53,10 +53,8 @@ class AccountUpdateView(UpdateView):
     #겟요청 처리 겟 메소드 오버라이딩
 
 #method_decorator라는 번역기를 달아서, 클래스 안의 메소드에도 작용하도록
-@method_decorator(login_required, 'get')
-@method_decorator(login_required, 'post')
-@method_decorator(account_ownership_required, 'get')
-@method_decorator(account_ownership_required, 'post')
+@method_decorator(has_ownership, 'get')
+@method_decorator(has_ownership, 'post')
 class AccountDeleteView(DeleteView):
     #어떤 모델을 쓸건지
     model = User
