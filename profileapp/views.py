@@ -8,7 +8,7 @@ from profileapp.forms import ProfileCreationForm
 from profileapp.models import Profile
 
 
-class ProfileCreateView(CreateView)\
+class ProfileCreateView(CreateView):
     #어떤 모델을 쓸것인가
     model = Profile
     #Profile 모델을 만들기 위한 폼은 ProfileCreationForm 이라는 것을 쓸것이다

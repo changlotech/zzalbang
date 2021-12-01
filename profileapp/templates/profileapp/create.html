@@ -10,8 +10,8 @@
     <!-- profileapp 의 create 라우트로 post 요청을 보낼것이다 -->
     <form action="{% url 'profileapp:create' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
-        # {{form }}을 부트스트랩으로 예쁘게
-        # 부트스트랩과 장고 연결 문법임.
+        <!-- {{form }}을 부트스트랩으로 예쁘게  -->
+        <!--  부트스트랩과 장고 연결 문법임.   -->
       {% bootstrap_form form %}
       <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
     </form>
