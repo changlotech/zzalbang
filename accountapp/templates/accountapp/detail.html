@@ -13,13 +13,20 @@
         <h5 style="margin-bottom:3rem;">
             {{ target_user.profile.message }}
         </h5>
+        {% if target_user == request.user %}
+                    <!-- 프로필 수정 타겟유제가 진짜 주인유저일 때 -->
+            <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
+                프로필수정
+            </a>
+        <br /><br />
         {% else %}
-            {% if target_user == request.user %}
+
             <a href="{% url 'profileapp:create' %}">
                 <h2 style="font-weight: bold;">
                     프로필생성
                 </h2>
             </a>
+
             {% endif %}
         {% endif %}
         {% if target_user == request.user %}
