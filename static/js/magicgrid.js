@@ -282,4 +282,14 @@ let magicGrid = new MagicGrid({
   useMin: true
 });
 
+var brick = document.getElementsByTagName("img");
+// brick 하나하나마다 이벤트리스너를 사용해서 load 가 되었을 때
+// function 을 넣어주는데 그 function 이 magicGrid.positionItems(); 라는 것을 실행시켜주 고 끝냄
+// 이미지가 로드가 되었을때 매직그리드를 다시 포지셔닝 하라는 이벤트리스너를 추가
+for (let i = 0; i < brick.length; i++) {
+    brick[i].addEventListener('load', function () {
+        magicGrid.positionItems();
+    }, false);
+}
+
 magicGrid.listen();
