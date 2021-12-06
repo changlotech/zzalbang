@@ -87,3 +87,4 @@ __pycache__/
 media/
 
 .idea/workspace.xml/
+migrations/
