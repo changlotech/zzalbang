@@ -7,5 +7,6 @@ app_name = 'articleapp'
 urlpatterns = [
      path('list/', TemplateView.as_view(template_name='articleapp/list.html'), name='list'),
      path('create/', views.ArticleCreateView.as_view(), name='create'),
+     path('detail/<int:pk>/', views.ArticleDetailView.as_view(), name='detail'),
 
 ]

@@ -88,3 +88,8 @@ media/
 
 .idea/workspace.xml/
 migrations/
+
+#도커 환경에서 백업 제외할 것
+.env.prod
+.env.prod.db
+

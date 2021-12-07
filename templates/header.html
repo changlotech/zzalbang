@@ -1,9 +1,13 @@
 <div  class="window4sns_header">
     <div>
-        <h1 class="window4sns_logo">TTM TalmoBang</h1>
+        <h1 class="window4sns_logo">3zzal.com</h1>
     </div>
     <div>
-        <span>nav1</span>
+        <a href="{}% url 'articleapp:list'%">
+            <span>
+                게시글
+            </span>
+        </a>
         <span>nav2</span>
         <span>nav3</span>
         {% if not user.is_authenticated %}
@@ -13,7 +17,8 @@
                     SignUp
                 </span>
               </a>
-             <a href="{% url 'accountapp:login' %}?next={{ request.path }}">
+        #그 자리에서 로그인,  그 후에도 그 자리로 로딩
+        <a href="{% url 'accountapp:login' %}?next={{ request.path }}">
                 <span>
                     Login
                 </span>
