@@ -2,8 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView
 
+from articleapp.decorators import account_ownership_required
 from articleapp.forms import ArticleCreationForm
 from articleapp.models import Article
 
@@ -39,4 +40,22 @@ class ArticleDetailView(DetailView):
     template_name = 'articleapp/detail.html'
     # {{모델명_detail}}안쓰고, 위의 html 에서 특정 Article 객체를 어떤 으름으로 {{}}안쪽 써서 표현할 것인가
     context_object_name = 'target_article'
+
+@method_decorator(account_ownership_required, 'get')
+@method_decorator(account_ownership_required, 'post')
+class ArticleUpdateView(UpdateView):
+    #모델은 Article을 쓸 것인가
+    model = Article
+    #Article 수정할 때 입력받은 폼은 ArticleCreationForm 을 쓸 것이다
+    form_class = ArticleCreationForm
+    # ArticleCreationForm을 찍어낼 html은 articleapp 폴더안의 update.html
+    template_name = 'articleapp/update.html'
+    context_object_name = 'target_article'
+
+    def get_success_url(self):
+        # 성공 후 돌아가는 페이지
+        return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
+
+
+
 
