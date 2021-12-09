@@ -3,7 +3,7 @@
         <h1 class="window4sns_logo">3zzal.com</h1>
     </div>
     <div>
-        <a href="{}% url 'articleapp:list'%">
+        <a href="{% url 'articleapp:list'%}">
             <span>
                 게시글
             </span>
@@ -17,7 +17,7 @@
                     SignUp
                 </span>
               </a>
-        #그 자리에서 로그인,  그 후에도 그 자리로 로딩
+        <!--그 자리에서 로그인,  그 후에도 그 자리로 로딩-->
         <a href="{% url 'accountapp:login' %}?next={{ request.path }}">
                 <span>
                     Login

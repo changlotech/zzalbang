@@ -18,7 +18,9 @@
       <a href="{% url 'articleapp:update' pk=target_article.pk %}">
         <p>게시글 수정</p>
       </a>
-
+      <a href="{% url 'articleapp:delete' pk=target_article.pk %}">
+        <p>게시글 삭제</p>
+      </a>
 
       {% endif %}
 

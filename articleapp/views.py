@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
 from articleapp.decorators import account_ownership_required
 from articleapp.forms import ArticleCreationForm
@@ -57,5 +57,14 @@ class ArticleUpdateView(UpdateView):
         return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
 
 
-
+class ArticleDeleteView(DeleteView):
+    #모델은 Article을 쓸 것이다
+    model = Article
+    #게시글 삭제할 버튼이 있는 html은 articleapp폴더 안의 delete.html이다
+    template_name = 'articleapp/delete.html'
+    #위의 html에서 특정 Article객체는 어떤 이름으로 표현할 것인가
+    context_object_name = 'target_article'
+    #게시글 삭제가 성공한다면 이동하게될 위치 지정
+    #lazy는 딕셔너리 자료 인풋이 아닌 kwargs아닌 때
+    success_url = reverse_lazy('articleapp:list')
 
