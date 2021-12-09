@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 
 from articleapp.decorators import account_ownership_required
 from articleapp.forms import ArticleCreationForm
@@ -57,6 +57,8 @@ class ArticleUpdateView(UpdateView):
         return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
 
 
+@method_decorator(account_ownership_required, 'get')
+@method_decorator(account_ownership_required, 'post')
 class ArticleDeleteView(DeleteView):
     #모델은 Article을 쓸 것이다
     model = Article
@@ -67,4 +69,15 @@ class ArticleDeleteView(DeleteView):
     #게시글 삭제가 성공한다면 이동하게될 위치 지정
     #lazy는 딕셔너리 자료 인풋이 아닌 kwargs아닌 때
     success_url = reverse_lazy('articleapp:list')
+
+
+class ArticleListView(ListView):
+    #모델은 Article을 쓸 것이다
+    model = Article
+    #Article리스트 뭉탱이를 찍어내는 html은 어떤 htmal을 쓸 것인가
+    template_name = 'articleapp/list.html'
+    #위의 html에서 어떤 이름으로 Article리스트 뭉탱이를 표현할 것인가?
+    context_object_name = 'article_list'
+    #5개 단위로 리스트 뭉탱이 만들기
+    pagenate_by = 3
 

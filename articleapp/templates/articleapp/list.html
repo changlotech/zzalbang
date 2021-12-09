@@ -2,18 +2,20 @@
 {% load static %}
 
 {% block content %}
+
+
 <style>
+    .container div {
+    width: 250px;
 
-.container div {
-  width: 280px;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+  }
 
-  background-color: antiquewhite;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
-}
-.container img {
+  .container img {
     width: 100%;
     border-radius: 1rem;
   }
@@ -21,44 +23,22 @@
 
 </style>
 
-<div class="container">
-      <div class="item1">
-        <img src="https://picsum.photos/200/300" alt="">
+
+    {% if article_list %}
+  <div class="container">
+      <!-- with 구문에서 "=" 기준으로 오른쪽 article 은 list.html 에있는 article -->
+      <!-- with 구문에선 "=" 기준으로 왼쪽에 article 은  piece/card.html 에 있는 article -->
+      {% for article in article_list %}
+        <a href="#">
+            {% include 'piece/card.html' with article=article %}
+        </a>
+      {% endfor %}
+      {% else %}
+      <div class="text-center">
+          <h1>게시글이 없습니다.</h1>
       </div>
-      <div>
-          <img src="https://picsum.photos/200/440" alt="">
-      </div>
-      <div>
-          <img src="https://picsum.photos/200/230" alt="">
-      </div>
-      <div>
-          <img src="https://picsum.photos/200/390" alt="">
-      </div>
-      <div>
-          <img src="https://picsum.photos/200/380" alt="">
-      </div>
-      <div>
-          <img src="https://picsum.photos/200/220" alt="">
-      </div>
-      <div>
-          <img src="https://picsum.photos/200/240" alt="">
-      </div>
-      <div>
-          <img src="https://picsum.photos/200/210" alt="">
-      </div>
-      <div>
-          <img src="https://picsum.photos/200/410" alt="">
-      </div>
-      <div>
-          <img src="https://picsum.photos/200/310" alt="">
-      </div>
-      <div>
-          <img src="https://picsum.photos/200/300" alt="">
-      </div>
-      <div>
-          <img src="https://picsum.photos/200/400" alt="">
-      </div>
-</div>
+  </div>
+    {% endif %}
 
     <div style="text-align: center">
         <a href="{% url 'articleapp:create' %}" class="btn btn-dark rounded-pill col-3 mt-3 mb-3">
@@ -67,8 +47,8 @@
     </div>
 
 
-<script src="{% static 'js/magicgrid.js' %}"></script>
 
+  <script src="{% static 'js/magicGrid.js' %}"></script>
 
 
 {% endblock %}
