@@ -24,27 +24,34 @@
 </style>
 
 
+
     {% if article_list %}
-  <div class="container">
-      <!-- with 구문에서 "=" 기준으로 오른쪽 article 은 list.html 에있는 article -->
-      <!-- with 구문에선 "=" 기준으로 왼쪽에 article 은  piece/card.html 에 있는 article -->
-      {% for article in article_list %}
+    <div class="container">
+        {% for article in article_list %}
         <a href="#">
             {% include 'piece/card.html' with article=article %}
         </a>
-      {% endfor %}
-      {% else %}
-      <div class="text-center">
-          <h1>게시글이 없습니다.</h1>
-      </div>
-  </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center">
+        <h1>게시글이 없습니다.</h1>
+    </div>
     {% endif %}
+<!-- "=" 기준으로 오른쪽에 있는 page_obj 는 ListView 로부터 나온 page_obj 이고  -->
+    <!-- "=" 기준으로 왼쪽에 있는 page_obj 는 piece/pagination.html 에 있는 page_obj 이다.  -->
+    {% include 'piece/pagination.html' with page_obj=page_obj %}
+
+
+
 
     <div style="text-align: center">
         <a href="{% url 'articleapp:create' %}" class="btn btn-dark rounded-pill col-3 mt-3 mb-3">
             Create Article
         </a>
     </div>
+
+
 
 
 

@@ -79,5 +79,5 @@ class ArticleListView(ListView):
     #위의 html에서 어떤 이름으로 Article리스트 뭉탱이를 표현할 것인가?
     context_object_name = 'article_list'
     #5개 단위로 리스트 뭉탱이 만들기
-    pagenate_by = 3
+    paginate_by = 1
 
