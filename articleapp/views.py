@@ -3,10 +3,12 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
+from django.views.generic.edit import FormMixin
 
 from articleapp.decorators import account_ownership_required
 from articleapp.forms import ArticleCreationForm
 from articleapp.models import Article
+from commentapp.forms import CommentCreationForm
 
 
 @method_decorator(login_required, 'get')
@@ -33,13 +35,16 @@ class ArticleCreateView(CreateView):
     def get_success_url(self):
         return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(DetailView, FormMixin):
     #어떤 모델을 쓸 것인가
     model = Article
     #이 위의 특정 Ariticel 객체를 찍어내는 html은 어떤 html을 쓸 것인가
     template_name = 'articleapp/detail.html'
     # {{모델명_detail}}안쓰고, 위의 html 에서 특정 Article 객체를 어떤 으름으로 {{}}안쪽 써서 표현할 것인가
     context_object_name = 'target_article'
+    #위의 html에서 찍어낼 Form은 CommentCreationForm이다
+    form_class = CommentCreationForm
+
 
 @method_decorator(account_ownership_required, 'get')
 @method_decorator(account_ownership_required, 'post')
