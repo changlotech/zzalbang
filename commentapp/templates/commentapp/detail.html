@@ -1,0 +1,36 @@
+<div style="border: 1px solid; text-align: left; padding: 4%; margin: 1rem 0; border-radius: 1rem;
+            border-color: #bbb;">
+    <div>
+        <!-- 사용자가 프로필이 있다면 -->
+        {% if comment.writer.profile %}
+        <!-- 프로필사진 -->
+        <img src="{{ comment.writer.profile.image.url }}" style="height: 3rem; width: 3rem; border-radius: 20rem;  object-fit: cover;" />
+        &nbsp;
+        <strong>
+            <!-- 댓글작성자.프로필.닉네임 -->
+            {{ comment.writer.profile.nickname }}
+        </strong>
+        {% else %}
+        <!-- 사용자가 프로필이 없다면 -->
+        <strong>
+            <!-- 댓글작성자-->
+            <span style="vertical-align: -0.24rem;" class="material-icons">face</span> {{ comment.writer }}
+        </strong>
+        {% endif %}
+        &nbsp;&nbsp;&nbsp;        &nbsp;&nbsp;&nbsp;
+        <!-- 댓글작성시간 -->
+        {{ comment.created_at }}
+    </div>
+    <div style="margin: 1rem 0;">
+        <!-- 댓글내용 -->
+        {{ comment.content | linebreaks }}
+    </div>
+    <!-- 작성자랑 유저가 같은경우에만 수정버튼 보이게끔 -->
+    {% if comment.writer == user %}
+    <div style="text-align: right">
+        <a title="수정" href="{% url 'commentapp:update' pk=comment.pk %}" class="material-icons" style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: 0.4rem;">
+            edit
+        </a>
+    </div>
+    {% endif %}
+</div>

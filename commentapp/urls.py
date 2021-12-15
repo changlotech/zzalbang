@@ -6,6 +6,7 @@ app_name='commentapp'
 
 urlpatterns =[
     path('create/', views.CommentCreateView.as_view(), name='create'),
+    path('update/<int:pk>/', views.CommentUpdateView.as_view(), name='update'),
 
 
 ]
