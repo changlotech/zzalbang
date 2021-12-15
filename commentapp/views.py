@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 
 from articleapp.models import Article
 from commentapp.decorators import comment_ownership_required
@@ -44,5 +44,17 @@ class CommentUpdateView(UpdateView):
     context_object_name = 'target_comment'
 
     #redirect page
+    def get_success_url(self):
+        return reverse('articleapp:detail', kwargs={'pk': self.object.article.pk})
+
+
+@method_decorator(comment_ownership_required, 'post')
+@method_decorator(comment_ownership_required, 'get')
+class CommentDeleteView(DeleteView):
+    model = Comment
+    template_name = 'commentapp/delete.html'
+    context_object_name = 'target_comment'
+
+    # redirect page
     def get_success_url(self):
         return reverse('articleapp:detail', kwargs={'pk': self.object.article.pk})

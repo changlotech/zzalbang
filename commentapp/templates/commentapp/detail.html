@@ -31,6 +31,11 @@
         <a title="수정" href="{% url 'commentapp:update' pk=comment.pk %}" class="material-icons" style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: 0.4rem;">
             edit
         </a>
+        <a title="삭제" href="{% url 'commentapp:delete' pk=comment.pk %}" class="material-icons"
+           style="box-shadow: 0 0 4px #fcc; border-radius: 10rem; padding: .4rem;">
+            cancel
+        </a>
     </div>
+
     {% endif %}
 </div>
