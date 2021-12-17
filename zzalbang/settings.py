@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-thl&+5v^ck4kd$fjsl(#1xg!8#4moq$o*zmri*atv%3=s2&xyy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'profileapp',
     'articleapp',
     'commentapp',
+    'galleryapp',
 ]
 
 MIDDLEWARE = [
