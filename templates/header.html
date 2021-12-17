@@ -8,8 +8,12 @@
                 게시글
             </span>
         </a>
-        <span>nav2</span>
-        <span>nav3</span>
+        <a href="#" class="window4sns_header_nav">
+            <span>
+                갤러리
+            </span>
+
+        </a>
         {% if not user.is_authenticated %}
         <!-- ?next 파라미터의 값 즉 현재위치로 리다이렉트 -->
               <a href="{% url 'accountapp:create' %}">
