@@ -6,6 +6,13 @@
     <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
       <img src="{{ target_gallery.image.url }}" alt=""
            style="height: 12rem; width: 12rem; border-radius: 20rem; margin-bottom: 2rem; object-fit: cover;">
+
+      {% if target_gallery.writer == request.user %}
+      <a title="갤러리수정" href="{% url 'galleryapp:update' pk=target_gallery.pk %}" class="material-icons gall_edit" style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: 0.4rem;">
+        edit
+      </a>
+      {% endif %}
+
       <h2 style="font-weight:bold;">
         {{ target_gallery.title }}
       </h2>

@@ -2,8 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView, ListView
 
+from galleryapp.decorators import gallery_ownership_required
 from galleryapp.forms import GalleryCreationForm
 from galleryapp.models import Gallery
 
@@ -33,3 +34,34 @@ class GalleryDetailView(DetailView):
     model = Gallery
     template_name = 'galleryapp/detail.html'
     context_object_name = 'target_gallery'
+
+
+@method_decorator(gallery_ownership_required, 'get')
+@method_decorator(gallery_ownership_required, 'post')
+class GalleryUpdateView(UpdateView):
+    #모델
+    model = Gallery
+    #사용자 입력 폼
+    form_class = GalleryCreationForm
+    #html
+    template_name = 'galleryapp/update.html'
+    #인스턴스
+    context_object_name = 'target_gallery'
+
+
+    #성공하면
+
+    def get_success_url(self):
+        return reverse('galleryapp:detail', kwargs={'pk': self.object.pk})
+
+ #galery_list.html이 디폴트 이지만, 우리가 새 이름 지정
+class GalleryListView(ListView):
+    #어떤 모델 쓸것인가
+    model = Gallery
+    #갤러리 리스트 뭉탱이를 찍어내는 html은 어떤 html을 쓸 것인가?
+    template_name = 'galleryapp/List.html'
+    #위의 html에서 어떤이름으로 갤러리 리스트 뭉탱이를 표현할 것인가
+    context_object_name = 'gallery_list'
+    #갤러리를 몇개식 만들기
+    paginate_by = 15
+
