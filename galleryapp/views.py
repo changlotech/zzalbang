@@ -3,7 +3,9 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, ListView
+from django.views.generic.list import MultipleObjectMixin
 
+from articleapp.models import Article
 from galleryapp.decorators import gallery_ownership_required
 from galleryapp.forms import GalleryCreationForm
 from galleryapp.models import Gallery
@@ -30,10 +32,19 @@ class GalleryCreateView(CreateView):
     def get_success_url(self):
         return reverse('galleryapp:detail', kwargs={'pk': self.object.pk})
 
-class GalleryDetailView(DetailView):
+#MultipleObjectMixin은 여러가지 object들을 다룰 수 있게 만들어 주는 클래스
+class GalleryDetailView(DetailView, MultipleObjectMixin):
     model = Gallery
     template_name = 'galleryapp/detail.html'
     context_object_name = 'target_gallery'
+    #
+    paginate_by = 20
+    
+    def get_context_data(self, **kwargs):
+        #get_object()는 특정 pk값을 갖는 object를 가져오는 메소드. 여기서는 Gallery 한개.
+        #Article객체를 필터링 한다. gallery 필드가 특정 Gallery로 채워진 Article들로
+        object_list = Article.objects.filter(gallery=self.get_object())
+        return super(GalleryDetailView, self).get_context_data(object_list=object_list, **kwargs)
 
 
 @method_decorator(gallery_ownership_required, 'get')

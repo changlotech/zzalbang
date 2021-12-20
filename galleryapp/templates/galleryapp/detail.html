@@ -21,6 +21,17 @@
         {{ target_gallery.description }}
       </h5>
 
+      <!-- object_list = Article.objects.filter(gallery=self.get_object()) -->
+      <div>
+        {% include 'piece/list_fragment.html' with article_list=object_list  %}
+      </div>
+
+      <div style="text-align: center">
+        <a href="{% url 'articleapp:create' %}" class="btn btn-dark rounded-pill mt-3 mb-3 px-3">
+            게시글 생성
+        </a>
+      </div>
+
     </div>
   </div>
 
