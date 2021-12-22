@@ -42,6 +42,12 @@
           </a>
         {% endif %}
     </div>
+    <!-- object_list 는 accountapp의 views.py의 get_context_data로 부터 넘어온 값 -->
+    <!-- article_list는 piece/list_fragemnt.html의 것 -->
+    <div>
+      {% include 'piece/list_fragment.html' with article_list=object_list %}
+    </div>
+
 </div>
 
 {% endblock %}

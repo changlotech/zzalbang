@@ -6,9 +6,11 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic.list import MultipleObjectMixin
 
 from accountapp.decorator import account_ownership_required
 from accountapp.forms import AccountUpdateForm
+from articleapp.models import Article
 
 has_ownership = [account_ownership_required, login_required]
 
@@ -26,13 +28,19 @@ class AccountCreateView(CreateView):
     template_name = 'accountapp/create.html'
 
 
-class AccountDetailView(DetailView):
+class AccountDetailView(DetailView,MultipleObjectMixin):
     #어떤 모델을 쓸건지
     model = User
     #어떤 템플릿에서 시각화해서 보여줄 것인지
     template_name = 'accountapp/detail.html'
     #위의 템플릿에서 User 모델을 어떤 변수명으로 사용할 것인지
     context_object_name = 'target_user'
+
+    paginate_by = 35
+
+    def get_context_data(self, **kwargs):
+        object_list = Article.objects.filter(writer=self.get_object())
+        return super(AccountDetailView, self).get_context_data(object_list=object_list, **kwargs)
 
 #method_decorator라는 번역기를 달아서, 클래스 안의 메소드에도 작용하도록
 # import를 has_ownership으로 묶어 주고, 두 줄로 줄임
