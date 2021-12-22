@@ -9,6 +9,7 @@ from articleapp.decorators import account_ownership_required
 from articleapp.forms import ArticleCreationForm
 from articleapp.models import Article
 from commentapp.forms import CommentCreationForm
+from galleryapp.models import Gallery
 
 
 @method_decorator(login_required, 'get')
@@ -21,6 +22,7 @@ class ArticleCreateView(CreateView):
     #ArticleCreationForm을 찍어낼  html은 articleapp 안의 create.html
     template_name = 'articleapp/create.html'
 
+
     #유효성 검사 메소드 form_valid를 오버라이딩
 
     def form_valid(self, form):
@@ -29,6 +31,8 @@ class ArticleCreateView(CreateView):
         # Artcle 객체의 writer필드를 채우기
         temp_article.writer = self.request.user
         # 원래 제공 함수의 self.object = form.save() 대신에
+
+        temp_article.gallery = Gallery.objects.get(pk=self.request.POST['gallery_pk'])
         temp_article.save()
         return super().form_valid(form)
 

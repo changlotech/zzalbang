@@ -31,6 +31,7 @@
         {% for article in article_list %}
         <a href="{% url 'articleapp:detail' pk=article.pk %}">
             {% include 'piece/card.html' with article=article %}
+            {{ article.title }}
         </a>
         {% endfor %}
     </div>

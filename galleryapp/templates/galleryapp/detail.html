@@ -27,7 +27,7 @@
       </div>
 
       <div style="text-align: center">
-        <a href="{% url 'articleapp:create' %}" class="btn btn-dark rounded-pill mt-3 mb-3 px-3">
+        <a href="{% url 'articleapp:create' %}?gallery_pk={{ target_gallery.pk }}" class="btn btn-dark rounded-pill mt-3 mb-3 px-3">
             게시글 생성
         </a>
       </div>
