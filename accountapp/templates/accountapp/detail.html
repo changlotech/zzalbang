@@ -1,53 +1,54 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div>
+  <div>
     <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
-        {% if target_user.profile %}
+      {% if target_user.profile %}
         <!-- 프로필 이미지 -->
         <img src="{{ target_user.profile.image.url }}" alt="" style="height: 12rem; width: 12rem; border-radius: 20rem; margin-bottom: 2rem; object-fit: cover;"/>
         <h2 style="font-weight: bold;">
-            {{ target_user.nickname }}
+          {{ target_user.profile.nickname }}
         </h2>
         <!-- 프로필메세지 -->
         <h5 style="margin-bottom:3rem;">
-            {{ target_user.profile.message }}
+          {{ target_user.profile.message }}
         </h5>
-        {% if target_user == request.user %}
-                    <!-- 프로필 수정 타겟유제가 진짜 주인유저일 때 -->
-            <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
-                프로필수정
-            </a>
+      {% if target_user == request.user %}
+      <!-- 프로필 수정 타겟유저가 진짜 주인 유저일때 -->
+        <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
+          프로필수정
+        </a>
         <br /><br />
-        {% else %}
-
-            <a href="{% url 'profileapp:create' %}">
-                <h2 style="font-weight: bold;">
-                    프로필생성
-                </h2>
-            </a>
-
-            {% endif %}
-        {% endif %}
+      {% endif %}
+      {% else %}
         {% if target_user == request.user %}
-          <a href="{% url 'accountapp:update' pk=user.pk %}">
-             <p>
-                 회원 정보 수정
-             </p>
-
-
-          </a>
-         <a href="{% url 'accountapp:delete' pk=user.pk %}">
-              회원 탈퇴
-          </a>
+        <a href="{% url 'profileapp:create' %}">
+          <span class="material-icons" style="font-size: 3rem;" >
+            person_add_alt_1
+          </span>
+          <h2 style="font-weight: bold;">
+            프로필생성
+          </h2>
+        </a>
         {% endif %}
+      {% endif %}
+      {% if target_user == request.user %}
+        <a title="회원정보수정" class="material-icons" href="{% url 'accountapp:update' pk=user.pk %}" style="box-shadow: 0 0 5px #bbb; boarder-radius: 50%; padding: 0.45rem;">
+          settings
+        </a>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a title="회원탈퇴" class="material-icons" href="{% url 'accountapp:delete' pk=target_user.pk %}" style="box-shadow: 0 0 5px #fcb; boarder-radius: 50%; padding: 0.45rem;">
+          cancel
+        </a>
+      {% endif %}
     </div>
-    <!-- object_list 는 accountapp의 views.py의 get_context_data로 부터 넘어온 값 -->
-    <!-- article_list는 piece/list_fragemnt.html의 것 -->
+
+    <!-- object_list 는 accountapp 의 views.py 의 get_context_data 로부터 넘어온 값  -->
     <div>
       {% include 'piece/list_fragment.html' with article_list=object_list %}
     </div>
 
-</div>
 
+
+  </div>
 {% endblock %}

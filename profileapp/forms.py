@@ -11,4 +11,8 @@ class ProfileCreationForm(ModelForm):
         # 어떤필드를 입력폼으로 만들것인가
         fields = ['image', 'nickname', 'message']
 
-
+        labels = {
+            'image': '사진',
+            'nickname': '별명',
+            'message': '대화명'
+        }

@@ -21,3 +21,5 @@ class Article(models.Model):
     gallery = models.ForeignKey(Gallery, on_delete=models.SET_NULL, null=True, blank=True, related_name='article')
 
 
+    def __str__(self):
+        return self.title
