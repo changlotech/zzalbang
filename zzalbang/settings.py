@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'commentapp',
     'galleryapp',
     'subscribeapp',
+    'django_summernote'
 ]
 
 MIDDLEWARE = [
@@ -156,3 +157,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = reverse_lazy('accountapp:hello_world')
 LOGOUT_REDIRECT_URL = reverse_lazy('accountapp:login')
+
+# 썸머노트 가로길이 100%
+SUMMERNOTE_CONFIG = {
+    'summernote': {
+        'width': '100%',
+    }
+}
