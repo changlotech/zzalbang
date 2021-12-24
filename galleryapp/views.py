@@ -9,6 +9,8 @@ from articleapp.models import Article
 from galleryapp.decorators import gallery_ownership_required
 from galleryapp.forms import GalleryCreationForm
 from galleryapp.models import Gallery
+from subscribeapp.models import Subscription
+
 
 @method_decorator(login_required, 'get')
 @method_decorator(login_required, 'post')
@@ -39,12 +41,20 @@ class GalleryDetailView(DetailView, MultipleObjectMixin):
     context_object_name = 'target_gallery'
     #
     paginate_by = 20
-    
+    # 아래 겟컨텍스트  는 템플릿으로 무언가(인스턴스)를 출력하고 싶을 때 쓰는 메소드
     def get_context_data(self, **kwargs):
+        #특정 pk 값을 갖는 갤러리 한개를 gallery변수에 담는다
+        gallery = self.object
+        #구독버튼을 누른 유저를 user변수에 담는다.
+        user = self.request.user
+        #유저가 인증된 유저라면 즉 로그인 했다면
+        if user.is_authenticated:
+            subscription = Subscription.objects.filter(user=user, gallery=gallery)
+
         #get_object()는 특정 pk값을 갖는 object를 가져오는 메소드. 여기서는 Gallery 한개.
         #Article객체를 필터링 한다. gallery 필드가 특정 Gallery로 채워진 Article들로
         object_list = Article.objects.filter(gallery=self.get_object())
-        return super(GalleryDetailView, self).get_context_data(object_list=object_list, **kwargs)
+        return super(GalleryDetailView, self).get_context_data(object_list=object_list, subscription=subscription,  **kwargs)
 
 
 @method_decorator(gallery_ownership_required, 'get')

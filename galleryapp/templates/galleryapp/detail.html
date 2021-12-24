@@ -21,6 +21,23 @@
         {{ target_gallery.description }}
       </h5>
 
+      <div class="text-center mb-5">
+        {% if user.is_authenticated %}
+          {% if not subscription %}
+          <!-- 구독 중이 아니라면 http 겟 요청으로 ?gallery_pk 의 값인 target_gallery.pk 넘겨줌   -->
+          <a href="{% url 'subscribeapp:subscribe' %}?gallery_pk={{ target_gallery.pk}}" class="btn btn-primary rounded-pill px-4">
+            구독
+          </a>
+          <!-- 구독 중이라면 같은 위치로 GET요청으로 정보를 넘겨줌-->
+          {% else %}
+          <a href="{% url 'subscribeapp:subscribe' %}?gallery_pk={{ target_gallery.pk}}" class="btn btn-secondary rounded-pill px-4">
+             구독취소
+          </a>
+          {% endif %}
+        {% endif %}
+
+     </div>
+
       <!-- object_list = Article.objects.filter(gallery=self.get_object()) -->
       <div>
         {% include 'piece/list_fragment.html' with article_list=object_list  %}

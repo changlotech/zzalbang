@@ -25,6 +25,7 @@ urlpatterns = [
     path('articles/', include('articleapp.urls')),
     path('comments/', include("commentapp.urls")),
     path('gallery/', include("galleryapp.urls")),
+    path('subscribe/', include("subscribeapp.urls")),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

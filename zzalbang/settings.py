@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'articleapp',
     'commentapp',
     'galleryapp',
+    'subscribeapp',
 ]
 
 MIDDLEWARE = [
