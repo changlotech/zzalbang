@@ -1,8 +1,10 @@
+
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView, ListView
 
 from galleryapp.models import Gallery
 from subscribeapp.models import Subscription
@@ -32,5 +34,14 @@ class SubscriptionView(RedirectView):
             Subscription(user=user, gallery=gallery).save()
         return super(SubscriptionView, self).get(request, *args, **kwargs)
 
+
+
+@method_decorator(login_required, 'get')
+class SubscriptionListView(ListView):
+    #모델은 Subscription
+    model = Subscription
+    template_name = 'subscribeapp/list.html'
+    context_object_name = 'subscription_list'
+    paginate_by = 30
 
 

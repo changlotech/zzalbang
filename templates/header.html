@@ -1,6 +1,6 @@
 <div  class="window4sns_header">
     <div>
-        <h1 class="window4sns_logo">3zzal.com</h1>
+        <h1 class="window4sns_logo"><span style="font-family: 'Noto Sans KR', sans-serif;">중소기업</span>SNS__3zzal.com</h1>
     </div>
     <div>
         <a href="{% url 'articleapp:list'%}">
@@ -13,6 +13,11 @@
                 갤러리
             </span>
 
+        </a>
+        <a href="{% url 'subscribeapp:list' %}"  class="window4sns_header_nav">
+            <span>
+                구독리스트
+            </span>
         </a>
         {% if not user.is_authenticated %}
         <!-- ?next 파라미터의 값 즉 현재위치로 리다이렉트 -->

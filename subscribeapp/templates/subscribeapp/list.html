@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+
+    .container {
+        padding: 0;
+        margin: 0, auto;
+    }
+
+    .container div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      border-radius: 1rem;
+    }
+
+    .container img {
+      width: 7rem;
+      height: 7rem;
+      object-fit: cover;
+      border-radius: 1rem;
+    }
+
+</style>
+{% if user == request.user %}
+    {% if subscription_list %}
+        <div class="container">
+            {% for subscription in subscription_list %}
+                {% if subscription.user == request.user %}
+                <a a href="{% url 'galleryapp:detail' pk=subscription.gallery.pk %}">
+                <div style="display: block; text-align: center">
+                    <img src="{{ subscription.gallery.image.url }}" alt="">
+                    <h5 class="mt-2" style="font-weight: bold;">
+                     {{ subscription.gallery.title}}
+                    </h5>
+                </div>
+                </a>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <script src="{% static 'js/magicgrid.js' %}"></script>
+        {% else %}
+        <div class="text-center">
+            <h1>구독중인 갤러리가 없습니다.</h1>
+        </div>
+    {% endif %}
+
+    {% include 'piece/pagination.html' with page_obj=page_obj %}
+
+{% endif %}
+{% endblock %}
