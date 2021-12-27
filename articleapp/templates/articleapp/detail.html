@@ -12,13 +12,13 @@
     </h1>
     {% for message in messages %}
       <div class="text-center">
-          <div class="btn btn-primary rounded-pill px-5 my-3">
+          <div class="btn btn-{{ message.tags }} rounded-pill px-5 my-3">
               {{ message }}
           </div>
       </div>
     {% endfor %}
 
-    <div style="text-align: center; max-width: 85px; margin: 4rem auto;">
+    <div style="text-align: center; max-width: 850px; margin: 4rem auto;">
       <h1>
         {{ target_article.title }}
       </h1>
@@ -34,7 +34,7 @@
 
       </div>
 
-      <img src="{{ target_article.image.url }}" alt="">
+      <img width="100%" src="{{ target_article.image.url }}" alt="">
 
       <p>
         {{ target_article.content | safe }}

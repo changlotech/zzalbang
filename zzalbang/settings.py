@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from django.urls import reverse_lazy
@@ -148,7 +149,9 @@ MEDIA_URL = '/media/'
 #미디어 파일을 어디로 모을 것인지
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
 
 
 # Default primary key field type
