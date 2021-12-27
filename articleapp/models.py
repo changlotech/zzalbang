@@ -20,6 +20,8 @@ class Article(models.Model):
     #갤러리 객체와 포린키로 연결.  갤러리 지워저도 article들 안지워짐, 갤러리로 부터 article을 참조하는 역참조(related name) 이름은 article
     gallery = models.ForeignKey(Gallery, on_delete=models.SET_NULL, null=True, blank=True, related_name='article')
 
+    like = models.IntegerField(default=0)
+
 
     def __str__(self):
         return self.title

@@ -3,10 +3,36 @@
 
 {% block content %}
   <div>
+    <h1 style="text-align: center;">
+      <a class="btn btn-dark" style="display:block; max-width:500px; margin: -17px auto 0px auto" href="{% url 'galleryapp:detail' pk=target_article.gallery.pk %}">
+        {{ target_article.gallery.title }}
+      </a>
+
+
+    </h1>
+    {% for message in messages %}
+      <div class="text-center">
+          <div class="btn btn-primary rounded-pill px-5 my-3">
+              {{ message }}
+          </div>
+      </div>
+    {% endfor %}
+
     <div style="text-align: center; max-width: 85px; margin: 4rem auto;">
       <h1>
         {{ target_article.title }}
       </h1>
+      <div style="height: 2rem;">
+        <a href="{% url 'likeapp:article_like' pk=target_article.pk %}">
+          <i class="material-icons" style="color: #f77; font-size: 1.2rem; vertical-align: middle;">
+            favorite
+          </i>
+          <span style="vertical-align: middle; font-size: 1.2rem;">
+            {{ target_article.like}}
+          </span>
+        </a>
+
+      </div>
 
       <img src="{{ target_article.image.url }}" alt="">
 
