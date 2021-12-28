@@ -55,7 +55,7 @@ class GalleryDetailView(DetailView, MultipleObjectMixin):
 
         #get_object()는 특정 pk값을 갖는 object를 가져오는 메소드. 여기서는 Gallery 한개.
         #Article객체를 필터링 한다. gallery 필드가 특정 Gallery로 채워진 Article들로
-        object_list = Article.objects.filter(gallery=self.get_object())
+        object_list = Article.objects.filter(gallery=self.get_object()).order_by('-pk')
         return super(GalleryDetailView, self).get_context_data(object_list=object_list, subscription=subscription,  **kwargs)
 
 

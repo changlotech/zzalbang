@@ -1,61 +1,76 @@
+
 {% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
-
-
 <style>
+
+    .container {
+        padding: 0;
+        margin: 0, auto;
+    }
+
+    .container a {
+      width: 45%;
+      max-width: 250px;
+    }
+
     .container div {
-    width: 250px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-    background-color: antiquewhite;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1rem;
-  }
+      border-radius: 1rem;
+    }
 
-  .container img {
-    width: 100%;
-    border-radius: 1rem;
-  }
+    .container img {
+      width: 100%;
+      border-radius: 1rem;
+    }
+
+    .article_like, .article_comment {
+        display: inline;
+        vertical-align: middle;
+        color: rgb(49, 40, 40);
+        font-size: 1.05rem !important;
+    }
+
+    .card_bot {
+        box-shadow: 0 4px 4px -4px black;
+    }
+
+
+
 
 
 </style>
-
-
-
     {% if article_list %}
     <div class="container">
         {% for article in article_list %}
         <a href="{% url 'articleapp:detail' pk=article.pk %}">
             {% include 'piece/card.html' with article=article %}
+            <div class="card_bot">
+                <span>
+                    <i style="color: #f77; vertical-align: bottom;" class="material-icons">favorite</i>
+                    <p class="article_like" >{{ article.like }}</p>
+                    <i style="color: #6b6b6b; vertical-align: bottom;" class="material-icons">comment</i>
+                    {% if article.comment.count > 0 %}
+                    <p class="article_comment">{{ article.comment.count }}</p>
+                    {% else %}
+                    <p class="article_comment">0</p>
+                    {% endif %}
+                </span>
+            </div>
         </a>
         {% endfor %}
     </div>
+    <script src="{% static 'js/magicgrid.js' %}"></script>
     {% else %}
     <div class="text-center">
         <h1>게시글이 없습니다.</h1>
     </div>
     {% endif %}
-<!-- "=" 기준으로 오른쪽에 있는 page_obj 는 ListView 로부터 나온 page_obj 이고  -->
-    <!-- "=" 기준으로 왼쪽에 있는 page_obj 는 piece/pagination.html 에 있는 page_obj 이다.  -->
+
     {% include 'piece/pagination.html' with page_obj=page_obj %}
-
-
-
-
-    <div style="text-align: center">
-        <a href="{% url 'articleapp:create' %}" class="btn btn-dark rounded-pill  mt-3 mb-3 px-3">
-            Create Article
-        </a>
-    </div>
-
-
-
-
-
-  <script src="{% static 'js/magicGrid.js' %}"></script>
-
 
 {% endblock %}

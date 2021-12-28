@@ -90,3 +90,6 @@ class ArticleListView(ListView):
     #5개 단위로 리스트 뭉탱이 만들기
     paginate_by = 1
 
+    #최신글을 앞에,  오랜 글은 뒤로
+    ordering = '-pk'
+
