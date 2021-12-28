@@ -5,7 +5,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 from django.views.generic.edit import FormMixin
 
-from articleapp.decorators import account_ownership_required
+from articleapp.decorators import article_ownership_required
 from articleapp.forms import ArticleCreationForm
 from articleapp.models import Article
 from commentapp.forms import CommentCreationForm
@@ -50,8 +50,8 @@ class ArticleDetailView(DetailView, FormMixin):
     form_class = CommentCreationForm
 
 
-@method_decorator(account_ownership_required, 'get')
-@method_decorator(account_ownership_required, 'post')
+@method_decorator(article_ownership_required, 'get')
+@method_decorator(article_ownership_required, 'post')
 class ArticleUpdateView(UpdateView):
     #모델은 Article을 쓸 것인가
     model = Article
@@ -66,8 +66,8 @@ class ArticleUpdateView(UpdateView):
         return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
 
 
-@method_decorator(account_ownership_required, 'get')
-@method_decorator(account_ownership_required, 'post')
+@method_decorator(article_ownership_required, 'get')
+@method_decorator(article_ownership_required, 'post')
 class ArticleDeleteView(DeleteView):
     #모델은 Article을 쓸 것이다
     model = Article
