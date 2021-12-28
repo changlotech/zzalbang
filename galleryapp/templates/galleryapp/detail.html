@@ -20,6 +20,11 @@
       <h5 style="margin-bottom:3rem;">
         {{ target_gallery.description }}
       </h5>
+      <!-- subscibeapp model로 부터 -->
+
+      <!-- articleapp 의 model로 부터 -->
+      <span style="font-size: 0.9rem; letter-spacing: 0.01rem;">구독자 <strong style="font-size: 1.3rem;">{{ target_gallery.subscription.count }}</strong> 명 </span>&nbsp;|
+      <span style="font-size: 0.9rem; letter-spacing: 0.01rem;">게시물 <strong style="font-size: 1.3rem;">{{ target_gallery.article.count }}</strong> 개 </span>
 
       <div class="text-center mb-5">
         {% if user.is_authenticated %}

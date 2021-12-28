@@ -42,11 +42,12 @@
       <!-- 게시글 작성자가 진짜 작성한 유저인지 검증라인 -->
       {% if target_article.writer == request.user %}
 
-      <a class="material-icons" href="{% url 'articleapp:update' pk=target_article.pk %}">
+      <a title="수정" style="box-shadow: 0 0 4px #ccc; border-radius: 50%; padding: 0.4rem;" class="material-icons" href="{% url 'articleapp:update' pk=target_article.pk %}">
         edit
       </a>
-      <a href="{% url 'articleapp:delete' pk=target_article.pk %}">
-        <p>게시글 삭제</p>
+      &nbsp;
+      <a title="삭제" style="box-shadow: 0 0 4px #ccc; border-radius: 50%; padding: 0.4rem;"class="material-icons" href="{% url 'articleapp:delete' pk=target_article.pk %}">
+        cancel
       </a>
 
       {% endif %}
