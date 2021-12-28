@@ -12,7 +12,7 @@ class Article(models.Model):
     #저장위지 반드시 저장
     image = models.ImageField(upload_to='article/', null=False)
     #내용작성 필드
-    content = models.TextField()
+    content = models.TextField(null=True, blank=True)
     #작성날짜, add로 게시글 생성했을 때의 시간으로 저장됨.
     created_at = models.DateTimeField(auto_now_add=True)
 

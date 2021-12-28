@@ -93,3 +93,7 @@ class ArticleListView(ListView):
     #최신글을 앞에,  오랜 글은 뒤로
     ordering = '-pk'
 
+
+def index(request):
+    return render(request, 'notice.html')
+
