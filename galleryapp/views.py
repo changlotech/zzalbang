@@ -50,6 +50,8 @@ class GalleryDetailView(DetailView, MultipleObjectMixin):
         #유저가 인증된 유저라면 즉 로그인 했다면
         if user.is_authenticated:
             subscription = Subscription.objects.filter(user=user, gallery=gallery)
+        else:
+            subscription = None
 
         #get_object()는 특정 pk값을 갖는 object를 가져오는 메소드. 여기서는 Gallery 한개.
         #Article객체를 필터링 한다. gallery 필드가 특정 Gallery로 채워진 Article들로
