@@ -4,8 +4,51 @@
 
   <div>
     <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
+      <script type="text/javascript">
+
+Kakao.init(''); // 초기화
+
+Kakao.Link.createDefaultButton({
+    container: '#create-kakao-link-btn',
+    objectType: 'feed',
+    content: {
+      title: '{{ target_gallery.title }}',
+      description: '#wind4sns #{{ target_gallery.title }}',
+      imageUrl:
+        'https://edit11020211.net{{ target_gallery.image.url }}',
+      link: {
+        mobileWebUrl: 'https://edit11020211.net/projects/detail/' + '{{target_gallery.pk}}',
+        webUrl: 'https://edit11020211.net/projects/detail/' + '{{target_gallery.pk}}' ,
+      },
+    },
+    social: {
+      likeCount: 286,
+      commentCount: 45,
+      sharedCount: 845,
+    },
+    buttons: [
+      {
+        title: '웹으로 보기',
+        link: {
+          mobileWebUrl: 'https://edit11020211.net/projects/detail/' + '{{target_gallery.pk}}',
+          webUrl: 'https://edit11020211.net/projects/detail/' + '{{target_gallery.pk}}',
+        },
+      },
+      {
+        title: '앱으로 보기',
+        link: {
+          mobileWebUrl: 'https://edit11020211.net/projects/detail/' + '{{target_gallery.pk}}',
+          webUrl: 'https://edit11020211.net/projects/detail/' + '{{target_gallery.pk}}',
+        },
+      },
+    ],
+  })
+</script>
+
+
       <img src="{{ target_gallery.image.url }}" alt=""
            style="height: 12rem; width: 12rem; border-radius: 20rem; margin-bottom: 2rem; object-fit: cover;">
+        <p>갤 매니져: <strong style="font-size: 2rem;">{{ target_gallery.writer }}</strong></p>
 
       {% if target_gallery.writer == request.user %}
       <a title="갤러리수정" href="{% url 'galleryapp:update' pk=target_gallery.pk %}" class="material-icons gall_edit" style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: 0.4rem;">

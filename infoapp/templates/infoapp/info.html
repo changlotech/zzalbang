@@ -2,9 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>info</title>
+    <style>
+        html body {text-align: center;}
+        table {background-color: rgb(255, 255, 255); width: 80%;  margin: 0 auto;}
+        @media screen and (max-width:808px) {
+            table {width: 93%;}
+            .mobile {display: none;}
+        }
+
+    </style>
 </head>
 <body>
-notice와 동일하게 게시판 형식으로
+    <br>
+    <br>
+    <h1>INFO</h1><br>
+    <table>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th class="mobile">작성자</th>
+            <th>날짜</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr onClick="location.href='https://www.naver.com/'" style="cursor:pointer;">
+            <td>1</td>
+            <td>공지사항 제목 입니다.</td>
+            <td class="mobile">창노텍</td>
+            <td>2020.04.11</td>
+        </tr>
+        <tr onClick="location.href='https://www.naver.com/'" style="cursor:pointer;">
+            <td>2</td>
+            <td>공지사항 제목 입니다.</td>
+            <td class="mobile">창노텍</td>
+            <td>2020.10.05</td>
+        </tr>
+        <tr onClick="location.href='https://www.naver.com/'" style="cursor:pointer;">
+            <td>3</td>
+            <td>공지사항 제목 입니다.</td>
+            <td class="mobile">창노텍</td>
+            <td>2021.07.16</td>
+        </tr>
+        <tr onClick="location.href='https://www.naver.com/'" style="cursor:pointer;">
+            <td>4</td>
+            <td>공지사항 제목 입니다.</td>
+            <td class="mobile">창노텍</td>
+            <td>2021.12.29</td>
+        </tr>
+        <tr onClick="location.href='https://www.naver.com/'" style="cursor:pointer;">
+            <td>5</td>
+            <td>공지사항 제목 입니다.</td>
+            <td class="mobile">창노텍</td>
+            <td>2021.12.29</td>
+        </tr>
+        <!-- tr 을 한문단만 복사해서  tbody 안에 넣고 내용 마음대로 수정하기-->
+        </tbody>
+    </table>
+    
 </body>
 </html>
