@@ -30,7 +30,8 @@ urlpatterns = [
     path('gallery/', include("galleryapp.urls")),
     path('subscribe/', include("subscribeapp.urls")),
     path('likes/', include("likeapp.urls")),
-    path('notice/', index),
+
+    path('infos/', include("infoapp.urls")),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

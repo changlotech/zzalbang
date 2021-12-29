@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'subscribeapp',
     'django_summernote',
     'likeapp',
+    'infoapp',
 ]
 
 MIDDLEWARE = [

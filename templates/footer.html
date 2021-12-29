@@ -1,8 +1,11 @@
 <div class="window4sns_footer">
     <div class="window4sns_footer_button" >
-        <span><a href="/notice/">공지사항</a></span> |
-        <span>제휴문의</span> |
-        <span>서비스 소개</span>
+        <!--<span><a href="{% url 'infoapp:notice' %}">공지사항</a></span> |-->
+        <span><a href="{% url 'infoapp:info' %}">공지사항</a></span> |
+        <span><a href="{% url 'infoapp:contact' %}">사업문의</a></span> |
+        <span><a href="{% url 'infoapp:company' %}">서비스소개</a></span>
+
+
     </div>
     <div style="margin-top: 1rem;">
         <h6 class="window4sns_logo">Window4SNS 중소기업SNS__ www.3zzal.com</h6>
