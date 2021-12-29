@@ -36,7 +36,7 @@ class AccountDetailView(DetailView,MultipleObjectMixin):
     #위의 템플릿에서 User 모델을 어떤 변수명으로 사용할 것인지
     context_object_name = 'target_user'
 
-    paginate_by = 35
+    paginate_by = 12
 
     def get_context_data(self, **kwargs):
         object_list = Article.objects.filter(writer=self.get_object())

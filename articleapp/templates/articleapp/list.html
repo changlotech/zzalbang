@@ -47,6 +47,7 @@
     {% if article_list %}
     <div class="container">
         {% for article in article_list %}
+        {% if article.like > 0 %}
         <a href="{% url 'articleapp:detail' pk=article.pk %}">
             {% include 'piece/card.html' with article=article %}
             <div class="card_bot">
@@ -62,6 +63,7 @@
                 </span>
             </div>
         </a>
+        {% endif %}
         {% endfor %}
     </div>
     <script src="{% static 'js/magicgrid.js' %}"></script>

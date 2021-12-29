@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 from django.views.generic.edit import FormMixin
@@ -88,12 +89,22 @@ class ArticleListView(ListView):
     #위의 html에서 어떤 이름으로 Article리스트 뭉탱이를 표현할 것인가?
     context_object_name = 'article_list'
     #5개 단위로 리스트 뭉탱이 만들기
-    paginate_by = 1
+    paginate_by = 12
 
     #최신글을 앞에,  오랜 글은 뒤로
     ordering = '-pk'
 
 
-def index(request):
-    return render(request, 'notice.html')
+    def get_queryset(self):
+        if self.request.GET['st'] == 'hot':
+            article_list = Article.objects.all().order_by('-pk')
+        elif self.request.GET['st'] == 'day':
+            article_list = Article.objects.filter(created_at__gte=timezone.now() - timezone.timedelta(day=1)).order_by('-like')
+        elif self.request.GET['st'] == 'week':
+            article_list = Article.objects.filter(created_at__gte=timezone.now() - timezone.timedelta(day=7)).order_by('-like')
+        elif self.request.GET['st'] == 'month':
+            article_list = Article.objects.filter(created_at__gte=timezone.now() - timezone.timedelta(day=30)).order_by('-like')
+
+        return article_list
+
 

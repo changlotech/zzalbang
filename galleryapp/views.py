@@ -86,5 +86,5 @@ class GalleryListView(ListView):
     #위의 html에서 어떤이름으로 갤러리 리스트 뭉탱이를 표현할 것인가
     context_object_name = 'gallery_list'
     #갤러리를 몇개식 만들기
-    paginate_by = 15
+    paginate_by = 12
 

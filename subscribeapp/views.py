@@ -42,6 +42,6 @@ class SubscriptionListView(ListView):
     model = Subscription
     template_name = 'subscribeapp/list.html'
     context_object_name = 'subscription_list'
-    paginate_by = 30
+    paginate_by = 12
 
 
