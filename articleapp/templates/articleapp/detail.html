@@ -39,6 +39,14 @@
       <p>
         {{ target_article.content | safe }}
       </p>
+      <div class="d-flex">
+            <div class="badge badge-light p-2 ml-auto">
+                <div>{{ target_article.created_at }}</div>
+
+            </div>
+
+
+      </div>
       <!-- 게시글 작성자가 진짜 작성한 유저인지 검증라인 -->
       {% if target_article.writer == request.user %}
 
@@ -53,6 +61,7 @@
       {% endif %}
 
       {% for comment in target_article.comment.all %}
+      <!-- with 구문에서 = 기준에서 왼쪽에 있는 comment 는 commentapp/detail.html에 있는 comment-->
         {% include 'commentapp/detail.html' with comment=comment %}
       {% endfor %}
 

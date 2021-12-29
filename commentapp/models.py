@@ -15,3 +15,15 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.content
+
+
+class  SubComment(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.SET_NULL, null=True, related_name='subcomment')
+    writer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='subcomment')
+    #대댓글 내용
+    content = models.TextField(null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    #자바의 toString유사, 특정객체에 유의미한 문자열 정보를 리턴하게 해준다
+    def __str__(self):
+        return self.content

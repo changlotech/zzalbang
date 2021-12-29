@@ -7,8 +7,8 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 
 from articleapp.models import Article
 from commentapp.decorators import comment_ownership_required
-from commentapp.forms import CommentCreationForm
-from commentapp.models import Comment
+from commentapp.forms import CommentCreationForm, SubCommentCreationForm
+from commentapp.models import Comment, SubComment
 
 
 class CommentCreateView(CreateView):
@@ -58,3 +58,25 @@ class CommentDeleteView(DeleteView):
     # redirect page
     def get_success_url(self):
         return reverse('articleapp:detail', kwargs={'pk': self.object.article.pk})
+
+
+
+class SubCommentCreateView(CreateView):
+
+    model = SubComment
+    #SubComment 모델 인스턴스를 만들기 위해서 사용자로부터 입력받는 폼은 어떤 것을 쓸것인가
+    form_class = SubCommentCreationForm
+    #어떤 html에서 이 form이 출력되게 할 것인가.  댓글디테일
+    template_name = 'commentapp/detail.html'
+
+    #유효성 검사 메소드인 form_valid를 오버라이딩
+    def form_valid(self, form):
+
+        temp_subcomment = form.save(commit=False)
+
+        temp_subcomment.comment = Comment.objects.get(pk=self.request.POST['comment_pk'])
+        temp_subcomment.writer = self.request.user
+        temp_subcomment.save()
+        return super().form_valid(form)
+    def get_success_url(self):
+        return reverse('articleapp:detail', kwargs={'pk': self.object.comment.article.pk})
