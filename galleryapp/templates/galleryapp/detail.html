@@ -6,7 +6,8 @@
     <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
       <script type="text/javascript">
 
-Kakao.init(''); // 초기화
+#만약 Kakao개발자 js 키를 넣어야 한다면 여기일까? 스티커에
+Kakao.init('3f8ce7338f851333ceada7fcfc7af800'); // 초기화
 
 Kakao.Link.createDefaultButton({
     container: '#create-kakao-link-btn',
@@ -15,7 +16,7 @@ Kakao.Link.createDefaultButton({
       title: '{{ target_gallery.title }}',
       description: '#wind4sns #{{ target_gallery.title }}',
       imageUrl:
-        'https://edit11020211.net{{ target_gallery.image.url }}',
+        'https://3zzal.com {{ target_gallery.image.url }}',
       link: {
         mobileWebUrl: 'https://3zzal.com/projects/detail/' + '{{target_gallery.pk}}',
         webUrl: 'https://3zzal.com/projects/detail/' + '{{target_gallery.pk}}' ,
@@ -30,15 +31,15 @@ Kakao.Link.createDefaultButton({
       {
         title: '웹으로 보기',
         link: {
-          mobileWebUrl: 'https://edit11020211.net/projects/detail/' + '{{target_gallery.pk}}',
-          webUrl: 'https://edit11020211.net/projects/detail/' + '{{target_gallery.pk}}',
+          mobileWebUrl: 'https://3zzal.com/gallery/detail/' + '{{target_gallery.pk}}',
+          webUrl: 'https://3zzal.com/gallery/detail/' + '{{target_gallery.pk}}',
         },
       },
       {
         title: '앱으로 보기',
         link: {
-          mobileWebUrl: 'https://edit11020211.net/projects/detail/' + '{{target_gallery.pk}}',
-          webUrl: 'https://edit11020211.net/projects/detail/' + '{{target_gallery.pk}}',
+          mobileWebUrl: 'https://3zzal.com/gallery/detail/' + '{{target_gallery.pk}}',
+          webUrl: 'https://3zzal.com/gallery/detail/' + '{{target_gallery.pk}}',
         },
       },
     ],
